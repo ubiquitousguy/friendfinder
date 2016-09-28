@@ -18,7 +18,7 @@ var matchArray = [
   },
   {
       "name": "Adele",
-      "photo": "https://en.wikipedia.org/wiki/File:Adele_2016.jpg"
+      "photo": "https://en.wikipedia.org/wiki/File:Adele_2016.jpg",
       "answers": [
         "1",
         "3",

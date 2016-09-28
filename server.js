@@ -17,9 +17,10 @@ app.use(bodyParser.json({
     type: 'application/vnd.api+json'
 }));
 
+
 //routing
-require('./app/routing/routes-api.js')(app);
-require('./app/routing/routes-html.js')(app);
+require('./app/routing/api-routes.js')(app);
+require('./app/routing/html-routes.js')(app);
 
 //listener
 app.listen(PORT,function() {
