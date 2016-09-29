@@ -1,259 +1,287 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Friend Finder</title>
+  <meta charset="UTF-8">
 
-	<!-- Latest compiled and minified CSS & JS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <title>Friend Finder</title>
 
-	<!-- Font Awesome Glyphicons -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-	<!-- Chosen -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
+  <!-- Bootstrap-Select CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
+
+  <!-- Styles CSS -->
+  <style type="text/css">
+    body {
+      font-family: sans-serif;;
+      text-transform: none;
+    }
+
+    label.question {
+      color: dodger blue;
+      font-weight: bolder;
+			font-size: 18px;
+    }
+
+    .custom {
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+    }
+
+    .number {
+      /*color: #62BBC1;*/
+      font-size: 18px;
+      font-weight: bolder;
+      text-transform: uppercase;
+    }
+
+    #submit {
+    	width: 960px;
+			font-size: 30px;
+    }
+
+    .large {
+      padding-left: 22px;
+      padding-right: 22px;
+      line-height: 180%;
+    }
+
+    .btn-primary {
+      background-color: navy;
+      border-color: navy;
+    }
+
+    .btn-primary:hover, .btn-primary:active, .btn-primary:focus, .btn-primary.focus {
+      background-color: dodger blue;
+      border-color: #3d949a;
+    }
+
+    .buttons {
+      padding-bottom: 9px;
+      margin: 40px 0 20px;
+
+    }
+
+    .site-footer {
+      position: relative;
+      padding-top: 40px;
+      padding-bottom: 40px;
+      margin-top: 40px;
+      line-height: 1.5;
+      color: #767676;
+      border-top: 1px solid #eee;
+    }
+
+    .site-footer-links {
+      margin: 0;
+      list-style: none;
+    }
+  </style>
+
+  <!-- Bootstrap's JavaScript requires jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+  <!-- Bootstrap JS -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+  <!-- Bootstrap-Select JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 </head>
 <body>
 
-	<div class="container">
 
-		<h2>Survey Questions</h2>
-		<hr>
+  <!-- modal -->
+  <div class="modal fade" tabindex="-1" role="dialog" id="match">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"><strong>Best Match</strong></h4>
+        </div>
+        <div class="modal-body text-center" id="match-result">
 
-		<h3><strong>About You</strong></h3>
-		<h4>Name (Required)</h4>
-		<input type="text" name="" id="name" class="form-control" required >
+          <!-- Show results here -->
 
-		<h4>Link to Photo Image (Required)</h4>
-		<input type="text" name="" id="photo" class="form-control" required >
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary custom large" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  <!-- /modal -->
 
-		<hr>
+  <div class="row clearfix"></div>
 
-		<h3><strong>Question 1</strong></h3>
-		<h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q1">
-	 		<option value=""></option>
-            <option value="1">1 (Strongly Disagree)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 (Strongly Agree)</option>
-      	</select>
+  <div class="container">
 
-		<h3><strong>Question 2</strong></h3>
-		<h4>Generally speaking, you rely more on your experience than your imagination.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q2">
-	 		<option value=""></option>
-            <option value="1">1 (Strongly Disagree)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 (Strongly Agree)</option>
-      	</select>
+    <form role="form">
 
+      <h3>Survey Questions!</h3>
 
-		<h3><strong>Question 3</strong></h3>
-		<h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q3">
-	 		<option value=""></option>
-            <option value="1">1 (Strongly Disagree)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 (Strongly Agree)</option>
-      	</select>
+      <p class="lead page-header"><strong>About You</strong></p>
 
+      <div class="form-group required">
+        <label for="friendName" class="control-label">Name (Required)</label>
+        <input type="text" required="required" class="form-control" id="friendName" name="friendName" placeholder="">
+      </div>
 
-		<h3><strong>Question 4</strong></h3>
-		<h4>You rarely do something just out of sheer curiosity.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q4">
-	 		<option value=""></option>
-            <option value="1">1 (Strongly Disagree)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 (Strongly Agree)</option>
-      	</select>
+      <div class="form-group required">
+        <label for="friendPhoto" class="control-label">Link to Photo Image (Required)</label>
+        <input type="url" required="required" class="form-control" id="friendPhoto" name="friendPhoto" placeholder="">
+      </div>
+
+      <p class="lead page-header">Survey Questions</p>
+
+      <!-- quiz -->
+      <div class="quiz-content">
 
 
-		<h3><strong>Question 5</strong></h3>
-		<h4>People can rarely upset you.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q5">
-	 		<option value=""></option>
-            <option value="1">1 (Strongly Disagree)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 (Strongly Agree)</option>
-      	</select>
+      <!-- content goes here -->
+
+      </div>
+      <!-- /quiz -->
+
+      <div class="form-group buttons">
+        <button type="submit" class="btn btn-primary btn-lg btn block" id="submit">Submit</button>
+        <!-- <button type="submit" class="btn btn-default custom large" id="clear">Clear</button>
+      </div> -->
+
+    </form>
+  </div>
 
 
-		<h3><strong>Question 6</strong></h3>
-		<h4>It is often difficult for you to relate to other people’s feelings.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q6">
-	 		<option value=""></option>
-            <option value="1">1 (Strongly Disagree)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 (Strongly Agree)</option>
-      	</select>
-
-
-		<h3><strong>Question 7</strong></h3>
-		<h4>In a discussion, truth should be more important than people’s sensitivities.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q7">
-	 		<option value=""></option>
-            <option value="1">1 (Strongly Disagree)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 (Strongly Agree)</option>
-      	</select>
-
-		<h3><strong>Question 8</strong></h3>
-		<h4>You rarely get carried away by fantasies and ideas.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q8">
-	 		<option value=""></option>
-            <option value="1">1 (Strongly Disagree)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 (Strongly Agree)</option>
-      	</select>
-
-		<h3><strong>Question 9</strong></h3>
-		<h4>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q9">
-	 		<option value=""></option>
-            <option value="1">1 (Strongly Disagree)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 (Strongly Agree)</option>
-      	</select>
-
-		<h3><strong>Question 10</strong></h3>
-		<h4>You feel more energetic after spending time with a group of people.</h4>
-	 	<select data-placeholder="" class="chosen-select" id="q10">
-	 		<option value=""></option>
-            <option value="1">1 (Strongly Disagree)</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5 (Strongly Agree)</option>
-      	</select>
-
-		<br>
-		<br>
-
-		<!-- Submit Button -->
-		<button type="submit" class="btn btn-primary btn-lg btn-block" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
- Submit</button>
-
-		<hr>
-	    <footer class="footer">
-	      <div class="container">
-		        <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/ubiquitousguy/friendfinder">GitHub Repo</a></p>
-	      </div>
-	    </footer>
-
-	</div>
-
-	<!-- Modal -->
-	<div id="resultsModal" class="modal fade" role="dialog">
-	  <div class="modal-dialog">
-
-	    <!-- Modal content-->
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h2 class="modal-title"><strong>Best Match</strong></h2>
-	      </div>
-	      <div class="modal-body">
-	        <h2 id="matchName"></h2>
-	        <img id="matchImg" src="https://en.wikipedia.org/wiki/File:Adele_2016.jpg" alt="">
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-
-	  </div>
-	</div>
+  <footer class="footer">
+    <div class="container">
+      <div class="site-footer">
+        <p><i class="fa fa-code" aria-hidden="true"></i> <a href="https://github.com/ubiquitousguy">Ubiquitous</a> | <i class="fa fa-github" aria-hidden="true"></i> <a href="https://github.com/ubiquitousguy/friendfinder">Github Repo</a></p>
+      </div>
+    </div>
+  </footer>
 
   <script type="text/javascript">
 
-  	// Chosen CSS
-    var config = {
-      '.chosen-select'           : {},
-      '.chosen-select-deselect'  : {allow_single_deselect:true},
-      '.chosen-select-no-single' : {disable_search_threshold:10},
-      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-      '.chosen-select-width'     : {width:"95%"}
-    }
-    for (var selector in config) {
-      $(selector).chosen(config[selector]);
-    }
+    $(document).ready(function(){
 
-    // Capture the form inputs
-    $("#submit").on("click", function(){
+      // Dynamically generate questions
+        var questions = {
+          q1: "Your mind is always buzzing with unexplored ideas and plans.",
+          q2: "Generally speaking, you rely more on your experience than your imagination.",
+          q3: "You find it easy to stay relaxed and focused even when there is some pressure.",
+          q4: "You rarely do something just out of sheer curiosity.",
+          q5: "People can rarely upset you.",
+          q6: "It is often difficult for you to relate to other people’s feelings.",
+          q7: "In a discussion, truth should be more important than people’s sensitivities.",
+          q8: "You rarely get carried away by fantasies and ideas.",
+          q9: "You think that everyone’s views should be respected regardless of whether they are supported by facts or not.",
+          q10: "You feel more energetic after spending time with a group of people."
+        };
+        var qnumber = 1;
+        for (var question in questions) {
 
-    	// Form validation
-    	function validateForm() {
-		  var isValid = true;
-		  $('.form-control').each(function() {
-		    if ( $(this).val() === '' )
-		        isValid = false;
-		  });
+          var div = $('<div></div>').addClass('form-group');
 
-		  $('.chosen-select').each(function() {
+          $(div).html('\
+            <label class="control-label question">\
+            <span class="number">Question ' + qnumber + ':</span> ' + questions[question] + '</label>\
+            <div><select class="selectpicker" title="Select answer">\
+                <option data-subtext="Strongly Disagree">1</option>\
+                <option>2</option>\
+                <option>3</option>\
+                <option>4</option>\
+                <option data-subtext="Strongly Agree">5</option>\
+              </select></div>');
 
-		  	if( $(this).val() === "")
-		  		isValid = false
-		  })
-		  return isValid;
-		}
+          // Give each question unique ID
+          $(div).find('.selectpicker').attr('id','q' + qnumber);
 
-		// If all required fields are filled
-		if (validateForm() == true)
-		{
-			// Create an object for the user's data
-	    	var userData = {
-	    		name: $("#name").val(),
-	    		photo: $("#photo").val(),
-	    		scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val(), ]
-	    	}
+          $('.quiz-content').append(div);
+
+          qnumber++;
+        };
+
+        console.log((qnumber-1) + " questions displaying!");
+
+      // On submit, add data to friends list
+        $('#submit').on('click', function(){
 
 
-	    	// Grab the URL of the website
-	    	var currentURL = window.location.origin;
+          // Create new object to store data
+          var newFriend = {
+            name: $('#friendName').val().trim(),
+            photo: $('#friendPhoto').val().trim(),
+            answers: []
+          };
 
-	    	// AJAX post the data to the friends API.
-	    	$.post(currentURL + "/api/friends", userData, function(data){
+          // Loop through each question to push new friend's answer to array
+          for (var i = 1; i < qnumber; i++) {
+            newFriend.answers.push(Number($('#q' + i).selectpicker('val')));
+          };
 
-	    		// Grab the result from the AJAX post so that the best match's name and photo are displayed.
-	    		$("#matchName").text(data.name);
-	    		$('#matchImg').attr("src", data.photo);
+          // Create array to find friend match
+          var totalDifference = [];
 
-		    	// Show the modal with the best match
-		    	$("#resultsModal").modal('toggle');
+          // Get location of root page
+          var currentURL = window.location.origin;
 
-	    	});
-		}
-		else
-		{
-			alert("Please fill out all fields before submitting!");
-		}
+          // Get existing array of data to compare answers
+          $.get(currentURL + '/api/friends', function(friendsArray, err, next){
 
-    	return false;
+            // If (err) throw err;
+            if (friendsArray !== undefined) {
+
+              var newFriendSum = 0;
+              $.each(newFriend.answers,function() {
+                  newFriendSum += parseFloat(this);
+              });
+
+              // Loop through existing friends
+              for (var j = 0; j < friendsArray.length; j++) {
+                var exisitingFriendSum = 0;
+                $.each(friendsArray[j].answers,function(){
+                  exisitingFriendSum += parseFloat(this);
+                });
+                totalDifference.push(Math.abs(exisitingFriendSum - newFriendSum));
+              };
+
+              // Get least difference using function to get the Min value in Array
+              Array.min = function(array){
+                return Math.min.apply(Math,array);
+              };
+
+              var friendMatch = friendsArray[totalDifference.indexOf(Array.min(totalDifference))];
+
+              var matchText = $('<h3>');
+              matchText.text(friendMatch.name);
+
+              var matchImg = $('<img>');
+              matchImg.attr('src',friendMatch.photo).width(275).height(275);
+              $('#match-result').append(matchText).append(matchImg);
+              // SHOW THE MATCH!
+              $('#match').modal('show');
+            };
+          });
+
+          $.post(currentURL + '/api/friends', newFriend, function(data){
+            console.log('Data submitted!');
+          });
+
+          return false;
+        });
+
+      // On modal close, reset form
+        $('#match').on('hidden.bs.modal', function () {
+          $('#friendName').val('');
+          $('#friendPhoto').val('');
+          $('.selectpicker').selectpicker('val','');
+      });
+
     });
-
-
   </script>
 
 </body>

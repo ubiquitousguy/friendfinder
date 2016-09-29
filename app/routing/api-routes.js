@@ -7,7 +7,7 @@ module.exports = function(app){
     // Shows json data on the page
 
     app.get('/api/friends', function(req,res){
-        res.json(matchArray);
+        res.json(friendsData);
     });
 
     // POST Requests

@@ -1,8 +1,8 @@
 //create array
-var matchArray = [
+var friendsArray = [
   {
-    "name": "Justin Bieber",
-    "photo": "https://en.wikipedia.org/wiki/File:Justin_Bieber_in_2015.jpg",
+    "name": "Justin Timberlake",
+    "photo": "https://en.wikipedia.org/wiki/Justin_Timberlake#/media/File:Justin_Timberlake_by_Gage_Skidmore_2.jpg",
     "answers": [
       "1",
       "3",
@@ -18,7 +18,7 @@ var matchArray = [
   },
   {
       "name": "Adele",
-      "photo": "https://en.wikipedia.org/wiki/File:Adele_2016.jpg",
+      "photo": "https://en.wikipedia.org/wiki/Adele#/media/File:Adele_2016.jpg",
       "answers": [
         "1",
         "3",
@@ -34,4 +34,4 @@ var matchArray = [
   }
 ];
 
-module.exports = matchArray;
+module.exports = friendsArray;
